@@ -1,0 +1,7 @@
+name = Ting Facebook Share
+description = Integrate Facebook's share button.
+core = 7.x
+package = Ting!
+version = 7.x-1.15
+stylesheets[all][] = css/artesis_facebookshare.css
+scripts[] = js/artesis_facebookshare.js

@@ -1,0 +1,64 @@
+<?php
+/**
+ * @file
+ *
+ */
+
+/**
+ * Implements hook_init().
+ */
+function artesis_facebookshare_init() {
+  global $base_url;
+  drupal_add_js('misc/jquery.form.js');
+  drupal_add_library('system', 'drupal.ajax');
+  drupal_add_js(array('artesis_facebookshare' => array('base_url' => $base_url)), 'setting');
+}
+
+/**
+ * Implements hook_menu().
+ */
+function artesis_facebookshare_menu() {
+  // Menu callback.
+  $items['artesis_facebookshare/json'] = array(
+    'page callback' => 'artesis_facebookshare_json_response',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  );
+  return $items;
+}
+
+/**
+ * @return string
+ *   Returns the HTML that represents the facebook share for the specific page,
+ *   in a json encoding.
+ */
+function artesis_facebookshare_json_response() {
+  $params = drupal_get_query_parameters();
+  $url = $params['url'] ? $params['url'] : '';
+  return drupal_json_output(theme_artesis_facebookshare($url));
+}
+
+/**
+ * Returns html of share count.
+ *
+ * @param string $url
+ *   The url whose share's on facebook we will check.
+ *
+ * @return string
+ *   Representing the html code for the shares of the specific URL.
+ *   Returns an empty string on service's fail.
+ */
+function theme_artesis_facebookshare($url) {
+  $url = "http://api.facebook.com/restserver.php?method=links.getStats&urls=" . urlencode($url);
+  // Return no content to be appended in case something fails.
+  $output = '';
+  $xml_file_contents = file_get_contents($url);
+  if ($xml_file_contents) {
+    $xml = simplexml_load_string($xml_file_contents);
+    if ($xml && isset($xml->link_stat->share_count)) {
+      // Get page shares.
+      $output = '<div class="artesis-facebookshare-count">' . $xml->link_stat->share_count . '</div>';
+    }
+  }
+  return $output;
+}
