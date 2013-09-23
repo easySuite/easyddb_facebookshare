@@ -104,7 +104,7 @@ function artesis_facebookshare_preprocess_page($page) {
         $og_title = $ting_entity->reply->record['dc:title']['dkdcplus:full'][0];
       }
     }
-    if (is_array($ting_entity->reply->record['dcterms:abstract'])) {
+    if (isset($ting_entity->reply->record['dcterms:abstract']) && is_array($ting_entity->reply->record['dcterms:abstract'])) {
       $abstract_array = array_shift(array_values($ting_entity->reply->record['dcterms:abstract']));
       if (isset($abstract_array[0])) {
         $og_description = $abstract_array[0];
