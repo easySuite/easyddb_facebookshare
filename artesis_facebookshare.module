@@ -49,7 +49,7 @@ function artesis_facebookshare_json_response() {
  *   Returns an empty string on service's fail.
  */
 function theme_artesis_facebookshare($url) {
-  $url = "http://api.facebook.com/restserver.php?method=links.getStats&urls=" . urlencode($url);
+  $url = "https://api.facebook.com/restserver.php?method=links.getStats&urls=" . urlencode($url);
   // Return no content to be appended in case something fails.
   $output = '';
   $xml_file_contents = file_get_contents($url);
