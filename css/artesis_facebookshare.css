@@ -6,10 +6,11 @@
   text-align: right;
   height: 30px;
 }
-#share .artesis-facebookshare-box-wrapper a {
+
+#share .artesis-facebookshare-links-wrapper {
   font-family: 'Helvetica Neue', Arial, sans-serif;
   font-weight: 900;
-  font-size: 16px;
+  font-size: 14px;
   line-height: 18px;
   position: relative;
   display: inline-block;
@@ -27,7 +28,6 @@
   overflow: hidden;
   height: 30px;
   outline: none;
-  text-decoration: none;
   background-color: #325d9a;
   background-image: -webkit-gradient(linear,left top,left bottom,from(#3972c1),to(#325d9a));
   background-image: -moz-linear-gradient(top,#3972c1,#325d9a);
@@ -36,27 +36,38 @@
   background-image: linear-gradient(top,#3972c1,#325d9a);
   border: #15468A solid 2px;
 }
-#share .artesis-facebookshare-box-wrapper a,
+
+#share .artesis-facebookshare-links-wrapper,
 #share .artesis-facebookshare-box-wrapper .artesis-facebookshare-count {
   display: inline-block; 
   zoom: 1; 
   *display: inline;
 }
-#share .artesis-facebookshare-box-wrapper span {
-  position: relative;
-  padding: 0px 5px;
-  top: 5px;
-}
-#share .artesis-facebookshare-image-wrapper {
-  float: left;
-  height: 30px;
+
+#share .artesis-facebookshare-box-wrapper .artesis-facebookshare-image-wrapper {
   border-right: 2px solid #15468A;
+  height: 30px;
+  padding: 0px 8px;
+  float: left;
 }
 
-#share .artesis-facebookshare-image-wrapper img{
+#share .artesis-facebookshare-box-wrapper img {
   position: relative;
-  padding: 0px 8px;
+  top: 2px;
   height: 27px;
+}
+
+#share .artesis-facebookshare-box-wrapper .artesis-facebookshare-span-wrapper {
+  position: relative;
+  height: 30px;
+  padding: 0px 5px;
+  top: 5px;
+  float: left;
+}
+
+#share .artesis-facebookshare-box-wrapper .artesis-facebookshare-span-wrapper span {
+  text-decoration: none;
+  color: #fff;
 }
 
 #share .artesis-facebookshare-count {
@@ -83,6 +94,7 @@
   behavior: url('border-radius.htc');
 
 }
+
 #share .artesis-facebookshare-count:after, .artesis-facebookshare-count:before {
   right: 100%;
   border: solid transparent;
@@ -92,6 +104,7 @@
   position: absolute;
   pointer-events: none;
 }
+
 #share .artesis-facebookshare-count:after {
   border-color: rgba(247, 247, 247, 0);
   border-right-color: #F7F7F7;
@@ -99,6 +112,7 @@
   top: 50%;
   margin-top: -5px;
 }
+
 #share .artesis-facebookshare-count:before {
   border-color: rgba(187, 187, 187, 0);
   border-right-color: #BBBBBB;
