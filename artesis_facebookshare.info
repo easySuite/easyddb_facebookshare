@@ -2,6 +2,6 @@ name = Artesis Facebook Share
 description = Integrate a Facebook share button.
 core = 7.x
 package = Artesis
-version = 7.x-1.15
+version = 7.x-1.18
 stylesheets[all][] = css/artesis_facebookshare.css
 scripts[] = js/artesis_facebookshare.js
