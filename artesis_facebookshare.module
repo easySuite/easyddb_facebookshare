@@ -5,62 +5,164 @@
  */
 
 /**
- * Implements hook_init().
+ * Implements hook_ctools_plugin_directory().
  */
-function artesis_facebookshare_init() {
-  global $base_url;
-  drupal_add_js('misc/jquery.form.js');
-  drupal_add_library('system', 'drupal.ajax');
-  drupal_add_js(array('artesis_facebookshare' => array('base_url' => $base_url)), 'setting');
-}
-
-/**
- * Implements hook_menu().
- */
-function artesis_facebookshare_menu() {
-  // Menu callback.
-  $items['artesis_facebookshare/json'] = array(
-    'page callback' => 'artesis_facebookshare_json_response',
-    'access arguments' => array('access content'),
-    'type' => MENU_CALLBACK,
-  );
-  return $items;
-}
-
-/**
- * @return string
- *   Returns the HTML that represents the facebook share for the specific page,
- *   in a json encoding.
- */
-function artesis_facebookshare_json_response() {
-  $params = drupal_get_query_parameters();
-  $url = $params['url'] ? $params['url'] : '';
-  return drupal_json_output(theme_artesis_facebookshare($url));
-}
-
-/**
- * Returns html of share count.
- *
- * @param string $url
- *   The url whose share's on facebook we will check.
- *
- * @return string
- *   Representing the html code for the shares of the specific URL.
- *   Returns an empty string on service's fail.
- */
-function theme_artesis_facebookshare($url) {
-  $url = "https://api.facebook.com/restserver.php?method=links.getStats&urls=" . urlencode($url);
-  // Return no content to be appended in case something fails.
-  $output = '';
-  $xml_file_contents = file_get_contents($url);
-  if ($xml_file_contents) {
-    $xml = simplexml_load_string($xml_file_contents);
-    if ($xml && isset($xml->link_stat->share_count)) {
-      // Get page shares.
-      $output = '<div class="artesis-facebookshare-count">' . $xml->link_stat->share_count . '</div>';
-    }
+function artesis_facebookshare_ctools_plugin_directory($module, $plugin) {
+  if ($module == 'ctools' && !empty($plugin)) {
+    return "plugins/$plugin";
   }
-  return $output;
+}
+
+/**
+ * Implements hook_block_info().
+ */
+function artesis_facebookshare_block_info() {
+  $blocks['facebook_share'] = array(
+    'info' => t('Facebook share'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_configure().
+ */
+function artesis_facebookshare_block_configure($delta = '') {
+  $form = array();
+
+  switch($delta) {
+    case 'facebook_share':
+      $state = variable_get('artesis_facebookshare_block_settings', array());
+      $form['custom_settings'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('Facebook plugin settings'),
+        '#collapsible' => FALSE,
+      );
+      $form['custom_settings'] += artesis_facebookshare_settings_form($state);
+    break;
+  }
+
+  return $form;
+}
+
+/**
+ * Implements hook_block_save().
+ */
+function artesis_facebookshare_block_save($delta = '', $edit = array()) {
+  switch($delta) {
+    case 'facebook_share':
+      variable_set('artesis_facebookshare_block_settings', $edit);
+    break;
+  }
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function artesis_facebookshare_block_view($delta = '') {
+  $block = array();
+
+  switch($delta) {
+    case 'facebook_share':
+      $settings = variable_get('artesis_facebookshare_block_settings', array());
+      $block['content'] = artesis_facebookshare_content($settings);
+    break;
+  }
+
+  return $block;
+}
+
+/**
+ * Provides common content structure.
+ *
+ * @param array $settings
+ *   FB plugin settings.
+ * @return array
+ *   Render array.
+ */
+function artesis_facebookshare_content(array $settings) {
+  $path = drupal_get_path('module', 'artesis_facebookshare');
+  // Settings are stored per item ID.
+  $id = empty($settings['id']) ? 'artesis_facebookshare_default' : $settings['id'];
+  // Filter unwanted items.
+  $js_settings = array_intersect_key(
+    $settings,
+    array_flip(array('layout', 'action', 'share', 'show_faces'))
+  );
+
+  $data = array(
+    '#markup' => '<div class="artesis_facebookshare" id="' . $id .'"></div>',
+    '#attached' => array(
+      'js' => array(
+        $path . '/js/jquery.facebook.min.js',
+        $path . '/js/artesis_facebookshare.js',
+        array(
+          'type' => 'setting',
+          'data' => array(
+            'artesis_facebookshare' => array($id => $js_settings),
+          ),
+        ),
+      ),
+    ),
+  );
+
+  return $data;
+}
+
+/**
+ * Provides common settings form.
+ *
+ * @param array $form_state
+ *   Stored form data.
+ * @return array
+ *   Drupal form.
+ */
+function artesis_facebookshare_settings_form(array $form_state) {
+  $form = array();
+  $form['layout'] = array(
+    '#type' => 'select',
+    '#options' => array(
+      'standard' => t('Standard'),
+      'box_count' => t('Box count'),
+      'button_count' => t('Button count'),
+      'button' => t('Button'),
+    ),
+    '#title' => t('Layout'),
+    '#default_value' => isset($form_state['layout']) ? $form_state['layout'] : 0,
+  );
+
+  $form['action'] = array(
+    '#type' => 'select',
+    '#options' => array(
+      'like' => t('Like'),
+      'recommend' => t('Recommend'),
+    ),
+    '#title' => t('Action'),
+    '#default_value' => isset($form_state['action']) ? $form_state['action'] : 0,
+  );
+
+  $form['share'] = array(
+    '#type' => 'checkbox',
+    '#return_value' => "true",
+    '#default_value' => isset($form_state['share']) ? $form_state['share'] : "false",
+    '#title' => t('Enable share button'),
+  );
+
+  $form['show_faces'] = array(
+    '#type' => 'checkbox',
+    '#return_value' => "true",
+    '#default_value' => isset($form_state['show_faces']) ? $form_state['show_faces'] : "false",
+    '#title' => t('Display faces'),
+  );
+
+  $id = isset($form_state['id']) ? $form_state['id'] : uniqid('facebook_plugin_id-');
+  $form['id'] = array(
+    '#type' => 'hidden',
+    '#value' => $id,
+  );
+
+  return $form;
 }
 
 /**
