@@ -22,9 +22,7 @@ function artesis_facebookshare_default_fe_block_settings() {
     'region' => 'content',
     'custom' => '0',
     'visibility' => '1',
-    'pages' => 'search/ting/*
-ting/object/*
-ting/collection/*',
+    'pages' => '',
     'title' => '<none>',
     'cache' => 8,
   );
