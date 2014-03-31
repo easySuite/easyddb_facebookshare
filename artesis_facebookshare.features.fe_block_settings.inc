@@ -21,10 +21,9 @@ function artesis_facebookshare_default_fe_block_settings() {
     'weight' => '0',
     'region' => 'content',
     'custom' => '0',
-    'visibility' => '1',
-    'pages' => 'search/ting/*
-ting/object/*
-ting/collection/*',
+    'visibility' => '0',
+    'pages' => '<front>
+admin/*',
     'title' => '<none>',
     'cache' => 8,
   );
