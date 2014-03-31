@@ -44,4 +44,5 @@ function artesis_facebookshare_plugin_edit_form_submit($form, &$form_state) {
   $form_state['conf']['share'] = $form_state['input']['share'];
   $form_state['conf']['action'] = $form_state['input']['action'];
   $form_state['conf']['id'] = $form_state['input']['id'];
+  $form_state['conf']['show_faces'] = $form_state['input']['show_faces'];
 }

@@ -9,7 +9,8 @@ Drupal.behaviors.artesis_facebookshare = {
         url: window.location.href,
         layout: Drupal.settings.artesis_facebookshare[this.id].layout,
         share: Drupal.settings.artesis_facebookshare[this.id].share,
-        action: Drupal.settings.artesis_facebookshare[this.id].action
+        action: Drupal.settings.artesis_facebookshare[this.id].action,
+        show_faces: Drupal.settings.artesis_facebookshare[this.id].show_faces
       });
     });
   }
