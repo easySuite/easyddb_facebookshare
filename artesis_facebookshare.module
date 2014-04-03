@@ -294,15 +294,4 @@ function artesis_facebookshare_preprocess_page($page) {
           drupal_add_html_head($og_element, $key);
     }
   }
-
-  if (in_array(IPE_RESTRICTED_ROLE, $user->roles)) {
-    $protected_panes = drupal_static('artesis_frontend_ipe', array());
-    $panes_selector = array();
-    foreach ($protected_panes as $pane_id) {
-      $panes_selector[] = 'pane-delete-panel-pane-' . $pane_id;
-    }
-    if (count($panes_selector)) {
-      drupal_add_js('(function($) { $(document).ready(function() { $("#' . join(', #', $panes_selector) . '").parent().remove(); }) })(jQuery);', 'inline');
-    }
-  }
 }

@@ -1,0 +1,32 @@
+<?php
+
+/**
+* Tests the functionality of the Artesis Facebook Share module.
+*/
+class ArtesisFacebookShareTestCase extends DrupalWebTestCase {
+  protected $privileged_user;
+
+  public static function getInfo() {
+    return array(
+      'name' => 'Artesis Facebookshare',
+      'description' => 'Ensure that the block exists.',
+      'group' => 'easyDDB',
+    );
+  }
+
+  public function setUp() {
+    $this->profile = 'ding2';
+    parent::setUp(array('ting_covers', 'ting_relation', 'ding_periodical', 'ding_availability', 'artesis_facebookshare'));
+  }
+
+  /**
+   * Test FB block presence.
+   */
+  public function testFBBlockPresence() {
+    // @TODO check presence of block on page.
+    // This is a pretty tricky task...
+
+    $block = block_load('artesis_facebookshare', 'facebook_share');
+    $this->assertFalse(empty($block->bid));
+  }
+}
