@@ -10,36 +10,34 @@
 function artesis_facebookshare_default_fe_block_settings() {
   $export = array();
 
-  // alpha_basetheme
-  $theme = array();
+  $export['version'] = '2.0';
 
-  $theme['artesis_facebookshare-facebook_share'] = array(
-    'module' => 'artesis_facebookshare',
+  $export['artesis_facebookshare-facebook_share'] = array(
+    'cache' => 8,
+    'custom' => 0,
     'delta' => 'facebook_share',
-    'theme' => 'alpha_basetheme',
-    'status' => '1',
-    'weight' => '0',
-    'region' => 'content',
-    'custom' => '0',
-    'visibility' => '0',
+    'module' => 'artesis_facebookshare',
+    'node_types' => array(),
     'pages' => '<front>
 admin/*',
+    'roles' => array(),
+    'themes' => array(
+      'ddbasic' => array(
+        'region' => 'content',
+        'status' => 1,
+        'theme' => 'ddbasic',
+        'weight' => 0,
+      ),
+      'seven' => array(
+        'region' => 'content',
+        'status' => 1,
+        'theme' => 'seven',
+        'weight' => 0,
+      ),
+    ),
     'title' => '<none>',
-    'cache' => 8,
+    'visibility' => 0,
   );
-
-  $export['alpha_basetheme'] = $theme;
-
-  $theme_default = variable_get('theme_default', 'garland');
-  $themes = list_themes();
-
-  // Custom code to propagate alpha_basetheme settings to all available themes.
-  foreach($themes as $theme_key => $_theme) {
-    if (!empty($themes[$theme_key]->status)) {
-      $theme['artesis_facebookshare-facebook_share']['theme'] = $theme_key;
-      $export[$theme_key] = $theme;
-    }
-  }
 
   return $export;
 }
