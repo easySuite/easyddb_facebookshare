@@ -167,8 +167,6 @@ function artesis_facebookshare_settings_form(array $form_state) {
 
 /**
  * Implements hook_preprocess_page().
- * Removes delete button on non-nodelist panes for
- * certain use role (IPE_RESTRICTED_ROLE).
  * Additionally, it adds open graph metadata for
  * pages searchResult, ting object and ting collection.
  */
