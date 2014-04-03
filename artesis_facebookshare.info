@@ -7,3 +7,4 @@ project = artesis_facebookshare
 dependencies[] = fe_block
 features[fe_block_settings][] = artesis_facebookshare-facebook_share
 features[features_api][] = api:1
+files[] = artesis_facebookshare.test
