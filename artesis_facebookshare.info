@@ -1,7 +1,7 @@
 name = Artesis Facebook Share
 description = Integrate a Facebook share button.
 core = 7.x
-package = Artesis
+package = easyDDB
 version = 7.x-1.19
 project = artesis_facebookshare
 dependencies[] = fe_block
