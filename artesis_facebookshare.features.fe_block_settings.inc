@@ -20,7 +20,13 @@ function artesis_facebookshare_default_fe_block_settings() {
     'node_types' => array(),
     'pages' => '<front>
 admin/*
-node/*',
+node/add
+node/add/*
+node/*/edit
+node/*/delete
+node/*/clone*
+taxonomy/term/*/edit
+taxonomy/term/*/delete',
     'roles' => array(),
     'themes' => array(
       'ddbasic' => array(
