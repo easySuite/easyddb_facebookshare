@@ -16,17 +16,18 @@ class ArtesisFacebookShareTestCase extends DrupalWebTestCase {
 
   public function setUp() {
     $this->profile = 'ding2';
-    parent::setUp(array('ting_covers', 'ting_relation', 'ding_periodical', 'ding_availability', 'artesis_facebookshare'));
+    parent::setUp(array('artesis_facebookshare'));
+    fe_block_settings_features_revert('artesis_facebookshare');
   }
 
   /**
    * Test FB block presence.
    */
   public function testFBBlockPresence() {
-    // @TODO check presence of block on page.
-    // This is a pretty tricky task...
+    $url = url('node', array('absolute' => TRUE));
+    $this->drupalGet($url);
 
-    $block = block_load('artesis_facebookshare', 'facebook_share');
-    $this->assertFalse(empty($block->bid));
+    $elem = $this->xpath('//*[@class="block block-artesis-facebookshare"]');
+    $this->assertFalse(empty($elem));
   }
 }

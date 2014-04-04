@@ -19,7 +19,8 @@ function artesis_facebookshare_default_fe_block_settings() {
     'module' => 'artesis_facebookshare',
     'node_types' => array(),
     'pages' => '<front>
-admin/*',
+admin/*
+node/*',
     'roles' => array(),
     'themes' => array(
       'ddbasic' => array(
