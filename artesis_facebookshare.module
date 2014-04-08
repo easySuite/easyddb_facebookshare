@@ -63,6 +63,11 @@ function artesis_facebookshare_block_save($delta = '', $edit = array()) {
 function artesis_facebookshare_block_view($delta = '') {
   $block = array();
 
+  // Prevent displaying on admin pages.
+  if (path_is_admin(current_path())) {
+    return $block;
+  }
+
   switch($delta) {
     case 'facebook_share':
       $settings = variable_get('artesis_facebookshare_block_settings', array());
