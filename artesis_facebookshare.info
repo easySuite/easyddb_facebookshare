@@ -5,6 +5,7 @@ package = easyDDB
 version = 7.x-1.19
 project = artesis_facebookshare
 dependencies[] = fe_block
+dependencies[] = opengraph_meta
 dependencies[] = ting
 dependencies[] = ting_covers
 features[fe_block_settings][] = artesis_facebookshare-facebook_share
