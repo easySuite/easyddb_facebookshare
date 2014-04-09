@@ -175,7 +175,7 @@ function artesis_facebookshare_settings_form(array $form_state) {
  * Additionally, it adds open graph metadata for
  * pages searchResult, ting object and ting collection.
  */
-function artesis_facebookshare_preprocess_page($page) {
+function artesis_facebookshare_preprocess_html() {
   $user = $GLOBALS['user'];
 
   // Detect different pages and add the appropriate open graph metadata.
@@ -184,6 +184,7 @@ function artesis_facebookshare_preprocess_page($page) {
   $og_description = '';
   $og_imageurl = '';
   $og_url = '';
+
   if (arg(0) == 'ting' && arg(1) == 'object' && arg(2) != NULL) {
     $ting_entity = ting_object_load(arg(2));
 
@@ -294,7 +295,7 @@ function artesis_facebookshare_preprocess_page($page) {
   }
   if (!empty($og_elements)) {
     foreach ($og_elements as $key => $og_element) {
-          drupal_add_html_head($og_element, $key);
+      drupal_add_html_head($og_element, $key);
     }
   }
 }
