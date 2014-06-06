@@ -7,7 +7,7 @@
 /**
  * Implements hook_ctools_plugin_directory().
  */
-function artesis_facebookshare_ctools_plugin_directory($module, $plugin) {
+function facebookshare_ctools_plugin_directory($module, $plugin) {
   if ($module == 'ctools' && !empty($plugin)) {
     return "plugins/$plugin";
   }
@@ -16,7 +16,7 @@ function artesis_facebookshare_ctools_plugin_directory($module, $plugin) {
 /**
  * Implements hook_block_info().
  */
-function artesis_facebookshare_block_info() {
+function facebookshare_block_info() {
   $blocks['facebook_share'] = array(
     'info' => t('Facebook share'),
     'cache' => DRUPAL_CACHE_GLOBAL,
@@ -28,18 +28,18 @@ function artesis_facebookshare_block_info() {
 /**
  * Implements hook_block_configure().
  */
-function artesis_facebookshare_block_configure($delta = '') {
+function facebookshare_block_configure($delta = '') {
   $form = array();
 
   switch($delta) {
     case 'facebook_share':
-      $state = variable_get('artesis_facebookshare_block_settings', array());
+      $state = variable_get('facebookshare_block_settings', array());
       $form['custom_settings'] = array(
         '#type' => 'fieldset',
         '#title' => t('Facebook plugin settings'),
         '#collapsible' => FALSE,
       );
-      $form['custom_settings'] += artesis_facebookshare_settings_form($state);
+      $form['custom_settings'] += facebookshare_settings_form($state);
     break;
   }
 
@@ -49,10 +49,10 @@ function artesis_facebookshare_block_configure($delta = '') {
 /**
  * Implements hook_block_save().
  */
-function artesis_facebookshare_block_save($delta = '', $edit = array()) {
+function facebookshare_block_save($delta = '', $edit = array()) {
   switch($delta) {
     case 'facebook_share':
-      variable_set('artesis_facebookshare_block_settings', $edit);
+      variable_set('facebookshare_block_settings', $edit);
     break;
   }
 }
@@ -60,7 +60,7 @@ function artesis_facebookshare_block_save($delta = '', $edit = array()) {
 /**
  * Implements hook_block_view().
  */
-function artesis_facebookshare_block_view($delta = '') {
+function facebookshare_block_view($delta = '') {
   $block = array();
 
   // Prevent displaying on admin pages.
@@ -70,8 +70,8 @@ function artesis_facebookshare_block_view($delta = '') {
 
   switch($delta) {
     case 'facebook_share':
-      $settings = variable_get('artesis_facebookshare_block_settings', array());
-      $block['content'] = artesis_facebookshare_content($settings);
+      $settings = variable_get('facebookshare_block_settings', array());
+      $block['content'] = facebookshare_content($settings);
     break;
   }
 
@@ -86,10 +86,10 @@ function artesis_facebookshare_block_view($delta = '') {
  * @return array
  *   Render array.
  */
-function artesis_facebookshare_content(array $settings) {
-  $path = drupal_get_path('module', 'artesis_facebookshare');
+function facebookshare_content(array $settings) {
+  $path = drupal_get_path('module', 'facebookshare');
   // Settings are stored per item ID.
-  $id = empty($settings['id']) ? 'artesis_facebookshare_default' : $settings['id'];
+  $id = empty($settings['id']) ? 'facebookshare_default' : $settings['id'];
   // Filter unwanted items.
   $js_settings = array_intersect_key(
     $settings,
@@ -97,15 +97,15 @@ function artesis_facebookshare_content(array $settings) {
   );
 
   $data = array(
-    '#markup' => '<div class="artesis_facebookshare" id="' . $id .'"></div>',
+    '#markup' => '<div class="facebookshare" id="' . $id .'"></div>',
     '#attached' => array(
       'js' => array(
         $path . '/js/jquery.facebook.min.js',
-        $path . '/js/artesis_facebookshare.js',
+        $path . '/js/facebookshare.js',
         array(
           'type' => 'setting',
           'data' => array(
-            'artesis_facebookshare' => array($id => $js_settings),
+            'facebookshare' => array($id => $js_settings),
           ),
         ),
       ),
@@ -123,7 +123,7 @@ function artesis_facebookshare_content(array $settings) {
  * @return array
  *   Drupal form.
  */
-function artesis_facebookshare_settings_form(array $form_state) {
+function facebookshare_settings_form(array $form_state) {
   $form = array();
   $form['layout'] = array(
     '#type' => 'select',
@@ -175,7 +175,7 @@ function artesis_facebookshare_settings_form(array $form_state) {
  * Additionally, it adds open graph metadata for
  * pages searchResult, ting object and ting collection.
  */
-function artesis_facebookshare_preprocess_html() {
+function facebookshare_preprocess_html() {
   $user = $GLOBALS['user'];
 
   // Detect different pages and add the appropriate open graph metadata.

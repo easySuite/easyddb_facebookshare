@@ -1,14 +1,14 @@
 <?php
 
 /**
-* Tests the functionality of the Artesis Facebook Share module.
+* Tests the functionality of the  Facebook Share module.
 */
-class ArtesisFacebookShareTestCase extends DrupalWebTestCase {
+class FacebookShareTestCase extends DrupalWebTestCase {
   protected $privileged_user;
 
   public static function getInfo() {
     return array(
-      'name' => 'Artesis Facebookshare',
+      'name' => 'Facebookshare',
       'description' => 'Ensure that the block exists.',
       'group' => 'easyDDB',
     );
@@ -16,8 +16,8 @@ class ArtesisFacebookShareTestCase extends DrupalWebTestCase {
 
   public function setUp() {
     $this->profile = 'ding2';
-    parent::setUp(array('artesis_facebookshare'));
-    fe_block_settings_features_revert('artesis_facebookshare');
+    parent::setUp(array('facebookshare'));
+    fe_block_settings_features_revert('facebookshare');
   }
 
   /**
@@ -27,7 +27,7 @@ class ArtesisFacebookShareTestCase extends DrupalWebTestCase {
     $url = url('node', array('absolute' => TRUE));
     $this->drupalGet($url);
 
-    $elem = $this->xpath('//*[@class="block block-artesis-facebookshare"]');
+    $elem = $this->xpath('//*[@class="block block-facebookshare"]');
     $this->assertFalse(empty($elem));
   }
 }
