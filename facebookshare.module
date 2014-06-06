@@ -211,7 +211,8 @@ function facebookshare_preprocess_html() {
       }
     }
     if (isset($ting_entity->reply->record['dcterms:abstract']) && is_array($ting_entity->reply->record['dcterms:abstract'])) {
-      $abstract_array = array_shift(array_values($ting_entity->reply->record['dcterms:abstract']));
+      $tmp_array = array(array_values($ting_entity->reply->record['dcterms:abstract']));
+      $abstract_array = array_shift($tmp_array[0]);
       if (isset($abstract_array[0])) {
         $og_description = $abstract_array[0];
       }
