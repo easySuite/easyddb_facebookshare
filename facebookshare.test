@@ -1,0 +1,33 @@
+<?php
+
+/**
+* Tests the functionality of the  Facebook Share module.
+*/
+class FacebookShareTestCase extends DrupalWebTestCase {
+  protected $privileged_user;
+
+  public static function getInfo() {
+    return array(
+      'name' => 'Facebookshare',
+      'description' => 'Ensure that the block exists.',
+      'group' => 'easyDDB',
+    );
+  }
+
+  public function setUp() {
+    $this->profile = 'ding2';
+    parent::setUp(array('facebookshare'));
+    fe_block_settings_features_revert('facebookshare');
+  }
+
+  /**
+   * Test FB block presence.
+   */
+  public function testFBBlockPresence() {
+    $url = url('node', array('absolute' => TRUE));
+    $this->drupalGet($url);
+
+    $elem = $this->xpath('//*[@class="block block-facebookshare"]');
+    $this->assertFalse(empty($elem));
+  }
+}

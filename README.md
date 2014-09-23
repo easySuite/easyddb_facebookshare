@@ -1,2 +1,2 @@
-artesis_facebookshare
+facebookshare
 =====================

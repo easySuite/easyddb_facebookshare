@@ -1,8 +1,0 @@
-name = Artesis Facebook Share
-description = Integrate a Facebook share button.
-core = 7.x
-package = Artesis
-version = 7.x-1.19
-dependencies[] = fe_block
-features[fe_block_settings][] = artesis_facebookshare-facebook_share
-features[features_api][] = api:1

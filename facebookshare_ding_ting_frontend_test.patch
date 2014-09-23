@@ -1,0 +1,15 @@
+diff --git a/ding_ting_frontend.module b/ding_ting_frontend.module
+index 62e9482..5b77de5 100644
+--- a/ding_ting_frontend.module
++++ b/ding_ting_frontend.module
+@@ -10,6 +10,10 @@ include_once('ding_ting_frontend.features.inc');
+  * Implements hook_entity_info_alter().
+  */
+ function ding_ting_frontend_entity_info_alter(&$entity_info) {
++  if (empty($entity_info['ting_object']['view modes'])) {
++    $entity_info['ting_object']['view modes'] = array();
++  }
++
+   $entity_info['ting_object']['view modes'] += array(
+     'collection_primary' => array(
+       'label' => t('Primary collection object'),
