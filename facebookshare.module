@@ -5,15 +5,6 @@
  */
 
 /**
- * Implements hook_ctools_plugin_directory().
- */
-function facebookshare_ctools_plugin_directory($module, $plugin) {
-  if ($module == 'ctools' && !empty($plugin)) {
-    return "plugins/$plugin";
-  }
-}
-
-/**
  * Implements hook_block_info().
  */
 function facebookshare_block_info() {
