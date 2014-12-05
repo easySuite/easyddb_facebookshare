@@ -5,15 +5,6 @@
  */
 
 /**
- * Implements hook_ctools_plugin_directory().
- */
-function facebookshare_ctools_plugin_directory($module, $plugin) {
-  if ($module == 'ctools' && !empty($plugin)) {
-    return "plugins/$plugin";
-  }
-}
-
-/**
  * Implements hook_block_info().
  */
 function facebookshare_block_info() {
@@ -211,8 +202,8 @@ function facebookshare_preprocess_html() {
       }
     }
     if (isset($ting_entity->reply->record['dcterms:abstract']) && is_array($ting_entity->reply->record['dcterms:abstract'])) {
-      $tmp_array = array(array_values($ting_entity->reply->record['dcterms:abstract']));
-      $abstract_array = array_shift($tmp_array[0]);
+      $abstract_array = array_values($ting_entity->reply->record['dcterms:abstract']);
+      $abstract_array = array_shift($abstract_array);
       if (isset($abstract_array[0])) {
         $og_description = $abstract_array[0];
       }
@@ -229,7 +220,8 @@ function facebookshare_preprocess_html() {
       }
     }
     if (count($ting_collection->reply->record['dc:title']) > 0 ) {
-      $first_title_element = array_shift(array_values($ting_collection->reply->record['dc:title']));
+      $first_title_element = array_values($ting_collection->reply->record['dc:title']);
+      $first_title_element = array_shift($first_title_element);
       if (isset($first_title_element[0])) {
         if (is_string($first_title_element[0])) {
           $og_title = $first_title_element[0];
@@ -242,7 +234,8 @@ function facebookshare_preprocess_html() {
       }
     }
     if (isset($ting_collection->reply->record['dcterms:abstract']) && is_array($ting_collection->reply->record['dcterms:abstract'])) {
-      $abstract_array = array_shift(array_values($ting_collection->reply->record['dcterms:abstract']));
+      $abstract_array = array_values($ting_collection->reply->record['dcterms:abstract']);
+      $abstract_array = array_shift($abstract_array);
       if (isset($abstract_array[0])) {
         $og_description = $abstract_array[0];
       }
