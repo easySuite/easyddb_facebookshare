@@ -1,0 +1,89 @@
+# $Id$
+#
+# LANGUAGE translation of Drupal (general)
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+# Generated from files:
+#  facebookshare.module: n/a
+#  facebookshare.info: n/a
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2015-02-19 16:14+0100\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: facebookshare.module:12
+msgid "Facebook share"
+msgstr ""
+
+#: facebookshare.module:30
+msgid "Facebook plugin settings"
+msgstr ""
+
+#: facebookshare.module:122
+msgid "Standard"
+msgstr ""
+
+#: facebookshare.module:123
+msgid "Box count"
+msgstr ""
+
+#: facebookshare.module:124
+msgid "Button count"
+msgstr ""
+
+#: facebookshare.module:125
+msgid "Button"
+msgstr ""
+
+#: facebookshare.module:127
+msgid "Layout"
+msgstr ""
+
+#: facebookshare.module:134
+msgid "Like"
+msgstr ""
+
+#: facebookshare.module:135
+msgid "Recommend"
+msgstr ""
+
+#: facebookshare.module:137
+msgid "Action"
+msgstr ""
+
+#: facebookshare.module:145
+msgid "Enable share button"
+msgstr ""
+
+#: facebookshare.module:152
+msgid "Display faces"
+msgstr ""
+
+#: facebookshare.module:246
+msgid "Search results"
+msgstr ""
+
+#: facebookshare.module:247
+msgid "Search results for"
+msgstr ""
+
+#: facebookshare.info:0
+msgid "Facebook Share"
+msgstr ""
+
+#: facebookshare.info:0
+msgid "Integrate a Facebook share button."
+msgstr ""
+
+#: facebookshare.info:0
+msgid "easyDDB"
+msgstr ""
+
