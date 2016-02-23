@@ -166,9 +166,11 @@ function facebookshare_settings_form(array $form_state) {
  * Additionally, it adds open graph metadata for
  * pages searchResult, ting object and ting collection.
  */
-function facebookshare_preprocess_html() {
+function facebookshare_preprocess_html($variables) {
   $user = $GLOBALS['user'];
-
+  $path = drupal_get_path('module', 'facebookshare') . '/css/easyddb_facebookshare.css';
+  drupal_add_css($path);
+  
   // Detect different pages and add the appropriate open graph metadata.
   $og_elements = array();
   $og_title = '';
