@@ -1,7 +1,7 @@
 name = Facebook Share
 description = Integrate a Facebook share button.
 core = 7.x
-package = easyDDB
+package = easyOPAC
 version = 7.x-2.4.4+easy
 project = facebookshare
 dependencies[] = opengraph_meta
