@@ -1,3 +1,13 @@
 .block-facebookshare {
   margin-left: 10px;
 }
+
+.pane-facebookshare-facebook-share {
+  clear: both;
+  margin-left: 10px;
+  margin-top: 10px;
+  background: #fff;
+  padding: 20px 10px 10px 20px;
+  margin-right: 10px;
+  top: 20px;
+}
