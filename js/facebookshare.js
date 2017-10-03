@@ -1,9 +1,16 @@
 /**
  * @file
  */
-
-Drupal.behaviors.facebookshare = {
+(function($) {
+  Drupal.behaviors.facebookshare = {
   attach: function (settings) {
+    if ($(document).find('body').hasClass('node-type-ding-news')) {
+      $('.pane-facebookshare-facebook-share').insertAfter('.ding-news-right .field-name-field-ding-news-tags');
+     }
+     if ($(document).find('body').hasClass('node-type-ding-event')) {
+       $('.pane-facebookshare-facebook-share').insertAfter('.right .field-name-field-ding-event-tags');
+     }
+
     jQuery('.facebookshare').once('fb').each(function() {
       jQuery(this).facebook("likebutton", {
         url: window.location.href,
@@ -16,3 +23,4 @@ Drupal.behaviors.facebookshare = {
     });
   }
 };
+})(jQuery);
