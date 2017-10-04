@@ -3,14 +3,19 @@
 }
 
 .pane-facebookshare-facebook-share {
-  clear: both;
+  max-width: 1200px;
   margin-left: auto;
   margin-right: auto;
-  max-width: 1200px;
-  background: #fff;
-  padding: 20px 10px 10px 35px;
-  margin-top: 10px;
-  top: 20px;
+  height: 50px;
+  position: relative;
+}
+
+.pane-facebookshare-facebook-share iframe {
+  height: 70px !important;
+  width: 250px !important;
+  position: absolute;
+  right: 0;
+  padding-right: 20px;
 }
 
 .node-type-ding-news .node-ding-news.node-full .field-name-field-ding-news-tags.field-type-taxonomy-term-reference {
