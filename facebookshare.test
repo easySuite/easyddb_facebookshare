@@ -10,7 +10,7 @@ class FacebookShareTestCase extends DrupalWebTestCase {
     return array(
       'name' => 'Facebookshare',
       'description' => 'Ensure that the block exists.',
-      'group' => 'easyDDB',
+      'group' => 'easyOPAC',
     );
   }
 
