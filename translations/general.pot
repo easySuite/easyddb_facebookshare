@@ -84,6 +84,6 @@ msgid "Integrate a Facebook share button."
 msgstr ""
 
 #: facebookshare.info:0
-msgid "easyDDB"
+msgid "easyOPAC"
 msgstr ""
 
