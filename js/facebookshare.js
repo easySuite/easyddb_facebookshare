@@ -3,16 +3,16 @@
  */
 (function($) {
   Drupal.behaviors.facebookshare = {
-  attach: function (settings) {
-    if ($(document).find('body').hasClass('node-type-ding-news')) {
-      $('.pane-facebookshare-facebook-share').insertAfter('.ding-news-right .field-name-field-ding-news-tags');
+  attach: function (context, settings) {
+    if ($(context).find('body').hasClass('node-type-ding-news')) {
+      $('#node-ding-news-full-group-right', context).append($('.pane-facebookshare-facebook-share'));
      }
-     if ($(document).find('body').hasClass('node-type-ding-event')) {
-       $('.pane-facebookshare-facebook-share').insertAfter('.right .field-name-field-ding-event-tags');
+     if ($(context).find('body').hasClass('node-type-ding-event')) {
+       $('#node-ding-event-full-group-right', context).append($('.pane-facebookshare-facebook-share'));
      }
 
-    jQuery('.facebookshare').once('fb').each(function() {
-      jQuery(this).facebook("likebutton", {
+    $('.facebookshare').once('fb').each(function() {
+      $(this).facebook("likebutton", {
         url: window.location.href,
         layout: Drupal.settings.facebookshare[this.id].layout,
         share: Drupal.settings.facebookshare[this.id].share,
