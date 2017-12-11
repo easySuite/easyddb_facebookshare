@@ -19,6 +19,13 @@
   padding-right: 20px;
 }
 
+@media screen and (max-width:600px) {
+  .pane-facebookshare-facebook-share iframe {
+    right: initial;
+    padding-left: 10px;
+  }
+}
+
 .node-type-ding-news .node-ding-news.node-full .field-name-field-ding-news-tags.field-type-taxonomy-term-reference {
   margin-bottom: 20px;
 }
