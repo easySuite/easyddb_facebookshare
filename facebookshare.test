@@ -27,7 +27,7 @@ class FacebookShareTestCase extends DrupalWebTestCase {
     $url = url('node', array('absolute' => TRUE));
     $this->drupalGet($url);
 
-    $elem = $this->xpath('//*[@class="block block-facebookshare"]');
+    $elem = $this->xpath('//*[@class="fb-share"]');
     $this->assertFalse(empty($elem));
   }
 }
