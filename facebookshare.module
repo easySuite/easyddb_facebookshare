@@ -31,12 +31,12 @@ function facebookshare_block_view($delta = '') {
 
   switch ($delta) {
     case 'facebook_share':
-      $current_page = $base_url . DIRECTORY_SEPARATOR . current_path();
+      $current_page = $base_url . '/' . current_path();
       $share_link = 'https://www.facebook.com/sharer/sharer.php?u=' . $current_page;
       $image_vars = array(
         'path' => drupal_get_path('module', 'facebookshare') . '/images/F_icon.svg',
-        'title' => 'Share on Facebook',
-        'alt' => 'Share on Facebook',
+        'title' => t('Share on Facebook'),
+        'alt' => t('Share on Facebook'),
         'width' => '25px',
       );
       $image = theme_image($image_vars);
@@ -48,7 +48,7 @@ function facebookshare_block_view($delta = '') {
             'class' => array(
               'fb-share',
             ),
-          )
+          ),
         )
       );
 
