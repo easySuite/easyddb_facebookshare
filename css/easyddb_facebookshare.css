@@ -1,87 +1,10 @@
-.block-facebookshare {
-  margin-left: 10px;
-}
-
 .pane-facebookshare-facebook-share {
-  max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
-  height: 50px;
-  position: relative;
-  padding-top: 10px;
+  max-width: 1124px;
+  width: 90%;
+  margin: 10px auto 0 auto;
+  z-index: 1;
 }
 
-.pane-facebookshare-facebook-share iframe {
-  height: 70px !important;
-  width: 330px !important;
-  position: absolute;
-  right: 0;
-  padding-right: 20px;
-}
-
-@media screen and (max-width:600px) {
-  .pane-facebookshare-facebook-share iframe {
-    right: initial;
-    padding-left: 10px;
-  }
-}
-
-.node-type-ding-news .node-ding-news.node-full .field-name-field-ding-news-tags.field-type-taxonomy-term-reference {
-  margin-bottom: 20px;
-}
-
-.node-type-ding-event .node-ding-event.node-full  .field-name-field-ding-event-tags {
-  margin-bottom: 20px;
-}
-
-.node-type-ding-event .field-type-taxonomy-term-reference + .pane-facebookshare-facebook-share iframe {
-  top: 52px;
-  left: 0;
-  width: 100% !important;
-}
-
-.node-type-ding-event .field-name-field-ding-event-body + .pane-facebookshare-facebook-share iframe {
-  top: 0;
-  left: 0;
-  width: 100% !important;
-}
-
-.node-type-ding-news .field-type-taxonomy-term-reference + .pane-facebookshare-facebook-share iframe {
-  top: 52px;
-  left: 0;
-  width: 100% !important;
- }
-
- .node-type-ding-news .field-name-field-ding-news-body + .pane-facebookshare-facebook-share iframe {
-  top: 0;
-  left: 0;
-  width: 100% !important;
- }
-
-.node-type-ding-event .panel-pane.pane-facebookshare-facebook-share {
-  margin: 0;
-  padding: 0;
-}
-
-.node-type-ding-event .content-wrapper .pane-content .ding2-site-template .panel-pane.pane-facebookshare-facebook-share {
-  background: inherit;
-}
-
-.html.node-type-ding-event .content-wrapper .pane-content .ding2-site-template .panel-pane.pane-facebookshare-facebook-share .panel-pane-inner {
-  padding: 0;
-  margin-left: 0;
-}
-
-.node-type-ding-news .panel-pane.pane-facebookshare-facebook-share {
-  margin: 0;
-  padding: 0;
-}
-
-.html.node-type-ding-news .content-wrapper .pane-content .ding2-site-template .panel-pane.pane-facebookshare-facebook-share .panel-pane-inner {
-  padding: 0;
-  margin-left: 0;
-}
-
-.node-type-ding-news .content-wrapper .pane-content .ding2-site-template .panel-pane.pane-facebookshare-facebook-share {
-  background: inherit;
+.pane-facebookshare-facebook-share .panel-pane-inner {
+  float: right;
 }
