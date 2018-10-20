@@ -18,41 +18,10 @@ function facebookshare_block_info() {
 }
 
 /**
- * Implements hook_block_configure().
- */
-function facebookshare_block_configure($delta = '') {
-  $form = array();
-
-  switch ($delta) {
-    case 'facebook_share':
-      $state = variable_get('facebookshare_block_settings', array());
-      $form['custom_settings'] = array(
-        '#type' => 'fieldset',
-        '#title' => t('Facebook plugin settings'),
-        '#collapsible' => FALSE,
-      );
-      $form['custom_settings'] += facebookshare_settings_form($state);
-      break;
-  }
-
-  return $form;
-}
-
-/**
- * Implements hook_block_save().
- */
-function facebookshare_block_save($delta = '', $edit = array()) {
-  switch ($delta) {
-    case 'facebook_share':
-      variable_set('facebookshare_block_settings', $edit);
-      break;
-  }
-}
-
-/**
  * Implements hook_block_view().
  */
 function facebookshare_block_view($delta = '') {
+  global $base_url;
   $block = array();
 
   // Prevent displaying on admin pages.
@@ -62,106 +31,32 @@ function facebookshare_block_view($delta = '') {
 
   switch ($delta) {
     case 'facebook_share':
-      $settings = variable_get('facebookshare_block_settings', array());
-      $block['content'] = facebookshare_content($settings);
+      $current_page = $base_url . '/' . current_path();
+      $share_link = 'https://www.facebook.com/sharer/sharer.php?u=' . $current_page;
+      $image_vars = array(
+        'path' => drupal_get_path('module', 'facebookshare') . '/images/F_icon.svg',
+        'title' => t('Share on Facebook'),
+        'alt' => t('Share on Facebook'),
+        'width' => '25px',
+      );
+      $image = theme_image($image_vars);
+      $fb_link = l($image, $share_link,
+        array(
+          'external' => TRUE,
+          'html' => TRUE,
+          'attributes' => array(
+            'class' => array(
+              'fb-share',
+            ),
+          ),
+        )
+      );
+
+      $block['content'] = $fb_link;
       break;
   }
 
   return $block;
-}
-
-/**
- * Provides common content structure.
- *
- * @param array $settings
- *   FB plugin settings.
- *
- * @return array
- *   Render array.
- */
-function facebookshare_content(array $settings) {
-  $path = drupal_get_path('module', 'facebookshare');
-  // Settings are stored per item ID.
-  $id = empty($settings['id']) ? 'facebookshare_default' : $settings['id'];
-  // Filter unwanted items.
-  $js_settings = array_intersect_key(
-    $settings,
-    array_flip(array('layout', 'action', 'share', 'show_faces'))
-  );
-
-  $data = array(
-    '#markup' => '<div class="facebookshare" id="' . $id . '"></div>',
-    '#attached' => array(
-      'js' => array(
-        $path . '/js/jquery.facebook.min.js',
-        $path . '/js/facebookshare.js',
-        array(
-          'type' => 'setting',
-          'data' => array(
-            'facebookshare' => array($id => $js_settings),
-          ),
-        ),
-      ),
-    ),
-  );
-
-  return $data;
-}
-
-/**
- * Provides common settings form.
- *
- * @param array $form_state
- *   Stored form data.
- *
- * @return array
- *   Drupal form.
- */
-function facebookshare_settings_form(array $form_state) {
-  $form = array();
-  $form['layout'] = array(
-    '#type' => 'select',
-    '#options' => array(
-      'standard' => t('Standard'),
-      'box_count' => t('Box count'),
-      'button_count' => t('Button count'),
-      'button' => t('Button'),
-    ),
-    '#title' => t('Layout'),
-    '#default_value' => isset($form_state['layout']) ? $form_state['layout'] : 0,
-  );
-
-  $form['action'] = array(
-    '#type' => 'select',
-    '#options' => array(
-      'like' => t('Like'),
-      'recommend' => t('Recommend'),
-    ),
-    '#title' => t('Action'),
-    '#default_value' => isset($form_state['action']) ? $form_state['action'] : 0,
-  );
-
-  $form['share'] = array(
-    '#type' => 'checkbox',
-    '#return_value' => "true",
-    '#default_value' => isset($form_state['share']) ? $form_state['share'] : "false",
-    '#title' => t('Enable share button'),
-  );
-
-  $form['show_faces'] = array(
-    '#type' => 'checkbox',
-    '#return_value' => "true",
-    '#default_value' => isset($form_state['show_faces']) ? $form_state['show_faces'] : "false",
-    '#title' => t('Display faces'),
-  );
-
-  $id = isset($form_state['id']) ? $form_state['id'] : uniqid('facebook_plugin_id-');
-  $form['id'] = array(
-    '#type' => 'hidden',
-    '#value' => $id,
-  );
-
-  return $form;
 }
 
 /**

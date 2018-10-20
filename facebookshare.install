@@ -1,0 +1,27 @@
+<?php
+
+/**
+ * @file
+ * Install/uninstall/update functionality for easyddb_facebookshare module.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function facebookshare_install() {
+  variable_set('facebookshare_block_settings', array());
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function facebookshare_uninstall() {
+  variable_del('facebookshare_block_settings');
+}
+
+/**
+ * Remove unneeded variable.
+ */
+function facebookshare_update_7001() {
+  variable_del('facebookshare_block_settings');
+}
